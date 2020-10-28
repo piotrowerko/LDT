@@ -26,10 +26,6 @@ def huber_results(t, A):
     return res_hub
 
 
-# def damp_func(x, a, b, c):
-#     """formula for approximattion of upper hilbert envelope"""
-#     return a * np.exp(-b * x) + c
-
 
 def fun(x, t, y):
     return x[0] * np.exp(-x[1] * t) + x[2] - y
