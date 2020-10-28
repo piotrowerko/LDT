@@ -61,3 +61,7 @@ if __name__ == '__main__':
     plt.ylabel("y")
     plt.legend()
     plt.show()
+
+    t, A = load_data('./murckowskaW.txt')
+    plt.plot(t, A)
+    plt.show()
