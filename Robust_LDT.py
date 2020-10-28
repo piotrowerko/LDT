@@ -1,8 +1,6 @@
-import statistics
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.signal import hilbert
-from scipy.optimize import curve_fit
 from scipy.optimize import least_squares
 from import_data import load_data
 
