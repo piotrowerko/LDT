@@ -39,7 +39,7 @@ plt.show()
 
 
 # Frequency domain representation
-fourierTransform = np.fft.fft(A3) / len(A3)  # Normalize amplitude 
+fourierTransform = np.fft.fft(A3) / len(A3)  # Normalize amplitude
 fourierTransform = fourierTransform[range(int(len(A3) / 2))]  # Exclude sampling frequency
 tpCount = len(A3)
 values = np.arange(int(tpCount / 2))
