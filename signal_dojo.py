@@ -1,7 +1,7 @@
 from signal.signal import Signal
 
 if __name__ == '__main__':
-
+    # define object
     myobject = Signal('ztpi')
     # print object name
     print(myobject)
