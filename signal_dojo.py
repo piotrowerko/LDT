@@ -7,10 +7,10 @@ if __name__ == '__main__':
     print(myobject)
     #import data
     myobject.load_data('./ztpi_data.txt')
-    #return LSF object
-    print(f'{myobject.lsq_resutls()}')
+    #return LSF object cost function
+    print(f'{myobject.lsq_resutls().cost}')
     # return Soft_L1 fit object
     print(f'{myobject.softL1_results()}')
-    # return Huber fit object
-    print(f'{myobject.huber_results()}')
+    # return Huber fit object's solve vector - first element
+    print(f'{myobject.huber_results().x[0]}')
 
