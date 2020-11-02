@@ -29,7 +29,6 @@ class Signal:
             self.time = t2 - t2[0]
             self.Amplitude = A2[loc_max_A2_begin_ind:loc_max_A2_end_ind:1]
 
-signalClass
     def lsq_resutls(self):
         amplitude_envelope = np.abs(hilbert(self.Amplitude))
         x0 = np.array([1.0, 1.0, 1.0])
