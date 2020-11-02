@@ -31,19 +31,16 @@ class Signal:
 
     def lsq_resutls(self):
         amplitude_envelope = np.abs(hilbert(self.Amplitude))
-        x0 = np.array([1.0, 1.0, 1.0])
-        res_lsq = least_squares(self.fun, x0, args=(self.time, amplitude_envelope))
+        res_lsq = least_squares(self.fun, self.x, args=(self.time, amplitude_envelope))
         return res_lsq
 
     def softL1_results(self):
         amplitude_envelope = np.abs(hilbert(self.Amplitude))
-        # x0 = np.array([1.0, 1.0, 1.0])
         res_soft_l1 = least_squares(self.fun, self.x, loss='soft_l1', f_scale=0.1, args=(self.time, amplitude_envelope))
         return res_soft_l1
 
     def huber_results(self):
         amplitude_envelope = np.abs(hilbert(self.Amplitude))
-        # x0 = np.array([1.0, 1.0, 1.0])
         res_hub = least_squares(self.fun, self.x, loss='huber', f_scale=0.1, args=(self.time, amplitude_envelope))
         return res_hub
 
