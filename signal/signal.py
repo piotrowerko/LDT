@@ -26,8 +26,10 @@ class Signal:
         loc_max_A2_end_ind = np.argmax(A2[int(0.9 * len(t)):]) + len(A2[:int(0.9 * len(t))])
         t2 = t[loc_max_A2_begin_ind:loc_max_A2_end_ind:1]
         self.time = t2 - t2[0]
+        self.time_cutted = self.time[int(0.02 * len(self.time)):int(0.98 * len(self.time))] # docinka 
         self.Amplitude = A2[loc_max_A2_begin_ind:loc_max_A2_end_ind:1]
         self.amplitude_envelope = np.abs(hilbert(self.Amplitude))
+        self.amplitude_envelope_cutted = self.amplitude_envelope[int(0.02 * len(self.amplitude_envelope)):int(0.98 * len(self.amplitude_envelope))] # docinka 
     
     def compute_sampling_spacing(self): #dodanie nowej fukncji
         """Computes key parameters of sampling features of the input signal from in-situ device"""
@@ -52,14 +54,14 @@ class Signal:
 
 
     def lsq_resutls(self):
-        res_lsq = least_squares(self.fun, self.x, args=(self.time, self.amplitude_envelope)) # usunięcie genrowania zmiennej lokalnej obwiedni
+        res_lsq = least_squares(self.fun, self.x, args=(self.time_cutted, self.amplitude_envelope_cutted)) # usunięcie genrowania zmiennej lokalnej obwiedni
         return res_lsq
 
     def softL1_results(self):
-        res_soft_l1 = least_squares(self.fun, self.x, loss='soft_l1', f_scale=0.1, args=(self.time, self.amplitude_envelope)) # jw
+        res_soft_l1 = least_squares(self.fun, self.x, loss='soft_l1', f_scale=0.1, args=(self.time_cutted, self.amplitude_envelope_cutted)) # jw
         return res_soft_l1
 
     def huber_results(self):
-        res_hub = least_squares(self.fun, self.x, loss='huber', f_scale=0.1, args=(self.time, self.amplitude_envelope))  # jw
+        res_hub = least_squares(self.fun, self.x, loss='huber', f_scale=0.1, args=(self.time_cutted, self.amplitude_envelope_cutted))  # jw
         return res_hub
 
