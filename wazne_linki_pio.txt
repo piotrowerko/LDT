@@ -1,0 +1,6 @@
+https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.butter.html
+
+ważne:
+https://stackoverflow.com/questions/25191620/creating-lowpass-filter-in-scipy-understanding-methods-and-units
+
+https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.hilbert.html
