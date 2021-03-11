@@ -70,6 +70,14 @@ class Signal:
         normal_cutoff = cutoff / nyq
         b, a = butter(order, normal_cutoff, btype='low', analog=False)
         self.Amplitude = lfilter(b, a, self.Amplitude_)
+        
+    def bandpass_filter(self, cutin, cutoff, order=5):
+        """filtering data with bandpass filter"""
+        nyq = 0.5 * self.fs
+        normal_cutin = cutin / nyq
+        normal_cutoff = cutoff / nyq
+        b, a = butter(order, [normal_cutin, normal_cutoff], btype='band', analog=False)
+        self.Amplitude = lfilter(b, a, self.Amplitude_)
 
     def compute_envelope(self):        
         self.amplitude_envelope = np.abs(hilbert(self.Amplitude))
