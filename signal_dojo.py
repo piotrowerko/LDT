@@ -6,11 +6,11 @@ from signal.signal import Signal
 
 def main():
     # define object
-    bridge_radar_dyn = Signal('\nzestaw1\n')
+    bridge_radar_dyn = Signal('\nztpi\n')
     # print object name
     print(bridge_radar_dyn)
     #import data
-    bridge_radar_dyn.load_data('./zestaw1.txt')
+    bridge_radar_dyn.load_data('./ztpi_data.txt')
    
     #check key parameters of sampling features of the input signal from in-situ device
     print(f'mean, median, and standard deviation of input sampling rate: \n{bridge_radar_dyn.compute_sampling_spacing()}\n')
