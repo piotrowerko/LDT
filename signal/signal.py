@@ -40,7 +40,7 @@ class Signal:
 
     def compute_period(self):
         """Computes period features of structural response """
-        A_sings = np.sign(self.Amplitude[:])
+        A_sings = np.sign(self.Amplitude_[:])  # poprawa z uwagi na filtr !!! 
         A_diffs = np.diff(A_sings[:])
         sign_changes_of_A = np.where(A_diffs != 0)[0]
         time_marks_of_roots = self.time[sign_changes_of_A]  # stemple czasowe, w których następuje zmiana znaku wychylenia konstrukcji
@@ -57,7 +57,7 @@ class Signal:
         self.fourierTransform = self.fourierTransform[range(int(len(self.Amplitude_) / 2))]  # Exclude sampling frequency
         tpCount = len(self.Amplitude_)
         values = np.arange(int(tpCount / 2))
-        self.timePeriod = tpCount / 200
+        self.timePeriod = tpCount / self.fs  # częstotliwość próbkowania jako zmienna !!!
         self.frequencies = values / self.timePeriod
         self.frequecies_cutted = self.frequencies[int(0.001 * len(self.frequencies)):int(0.05 * len(self.frequencies))]
         self.fourierTransform_cutted = self.fourierTransform[int(0.001 * len(self.fourierTransform)):int(0.05 * len(self.fourierTransform))]
