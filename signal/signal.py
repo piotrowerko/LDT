@@ -53,14 +53,14 @@ class Signal:
     
     def fourier_trans(self):
         """Frequency domain representation + filter cutoff computation"""
-        self.fourierTransform = np.fft.fft(self.Amplitude_) / len(self.Amplitude_)  # Normalize amplitude
-        self.fourierTransform = self.fourierTransform[range(int(len(self.Amplitude_) / 2))]  # Exclude sampling frequency
+        fourierTransform = np.fft.fft(self.Amplitude_) / len(self.Amplitude_)  # Normalize amplitude
+        fourierTransform = fourierTransform[range(int(len(self.Amplitude_) / 2))]  # Exclude sampling frequency
         tpCount = len(self.Amplitude_)
         values = np.arange(int(tpCount / 2))
         self.timePeriod = tpCount / self.fs  # częstotliwość próbkowania jako zmienna !!!
-        self.frequencies = values / self.timePeriod
-        self.frequecies_cutted = self.frequencies[int(0.001 * len(self.frequencies)):int(0.05 * len(self.frequencies))]
-        self.fourierTransform_cutted = self.fourierTransform[int(0.001 * len(self.fourierTransform)):int(0.05 * len(self.fourierTransform))]
+        frequencies = values / self.timePeriod
+        self.frequecies_cutted = frequencies[int(0.001 * len(frequencies)):int(0.05 * len(frequencies))]
+        self.fourierTransform_cutted = fourierTransform[int(0.001 * len(fourierTransform)):int(0.05 * len(fourierTransform))]
         loc_max_Ampl_begin_ind = np.argmax(self.fourierTransform_cutted)
         self.main_freq = self.frequecies_cutted[loc_max_Ampl_begin_ind]
  
