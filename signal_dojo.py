@@ -1,3 +1,4 @@
+import numpy as np
 import matplotlib.pyplot as plt
 from scipy.signal import hilbert 
 from scipy.optimize import least_squares
@@ -31,6 +32,20 @@ def main():
     print(f'Soft_L1 fit object: {bridge_radar_dyn.softL1_results().x}\n')
     # return Huber fit object's solve vector
     print(f'Huber fit objects solve vector: {bridge_radar_dyn.huber_results().x}')
+
+    #plotting_roboust_only
+    fig0, ax0 = plt.subplots()
+    ax0.plot(bridge_radar_dyn.time, bridge_radar_dyn.Amplitude_, label='signal')
+    ax0.plot(bridge_radar_dyn.time_cutted, bridge_radar_dyn.amplitude_envelope_cutted, label='envelope')
+    huber_fun_points = bridge_radar_dyn.fun(bridge_radar_dyn.huber_results().x, bridge_radar_dyn.time_cutted, 0)
+    plt.text(3.5, 0.10, r'a * exp(-Bt) + c', {'color': 'C2'})
+    param = bridge_radar_dyn.huber_results().x
+    plt.text(3.5, 0.08, f'a: {np.round(param[0], 3)},  b: {np.round(param[1], 3)},  c: {np.round(param[2], 3)}', {'color': 'C2'})
+    ax0.plot(bridge_radar_dyn.time_cutted, huber_fun_points, label='huber loss')
+    ax0.set_xlabel('Time [s]')
+    ax0.set_ylabel('Rel. vert. displacement [mm]')
+    plt.legend()
+    plt.show()
 
     #plotting
     fig, ax = plt.subplots()
