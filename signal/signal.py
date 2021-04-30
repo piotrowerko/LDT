@@ -63,6 +63,7 @@ class Signal:
         self.fourierTransform_cutted = fourierTransform[int(0.001 * len(fourierTransform)):int(0.05 * len(fourierTransform))]
         loc_max_Ampl_begin_ind = np.argmax(self.fourierTransform_cutted)
         self.main_freq = self.frequecies_cutted[loc_max_Ampl_begin_ind]
+        return self
  
     def lowpass_filter(self, cutoff, order=5):
         """filtering data with lowpass filter"""
@@ -70,6 +71,7 @@ class Signal:
         normal_cutoff = cutoff / nyq
         b, a = butter(order, normal_cutoff, btype='low', analog=False)
         self.Amplitude = lfilter(b, a, self.Amplitude_)
+        return self
         
     def bandpass_filter(self, cutin, cutoff, order=5):
         """filtering data with bandpass filter"""
@@ -78,10 +80,13 @@ class Signal:
         normal_cutoff = cutoff / nyq
         b, a = butter(order, [normal_cutin, normal_cutoff], btype='band', analog=False)
         self.Amplitude = lfilter(b, a, self.Amplitude_)
+        return self
+
 
     def compute_envelope(self):        
-        self.amplitude_envelope = np.abs(hilbert(self.Amplitude))
-        self.amplitude_envelope_cutted = self.amplitude_envelope[int(0.02 * len(self.amplitude_envelope)):int(0.98 * len(self.amplitude_envelope))] # docinka 
+        amplitude_envelope = np.abs(hilbert(self.Amplitude))
+        self.amplitude_envelope_cutted = amplitude_envelope[int(0.02 * len(amplitude_envelope)):int(0.98 * len(amplitude_envelope))] # docinka 
+        return self
 
     def lsq_resutls(self):
         res_lsq = least_squares(self.fun, self.x, args=(self.time_cutted, self.amplitude_envelope_cutted)) # usunięcie genrowania zmiennej lokalnej obwiedni
