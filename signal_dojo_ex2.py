@@ -3,11 +3,11 @@ from scipy.signal import hilbert
 from scipy.optimize import least_squares
 import numpy as np
 
-from signal_nr1 import DynamicSignal
+from signal.signal_in_min import MinuteSignal
 
 def main():
     # define object
-    bridge_poj_dyn = DynamicSignal('signal_wl_50')
+    bridge_poj_dyn = MinuteSignal('signal_wl_50')
     # print object name
     print(bridge_poj_dyn)
     #import data
@@ -20,9 +20,7 @@ def main():
     #return LSF object cost function
     #print(f'LSF object cost function: {bridge_poj_dyn.lsq_resutls().cost}\n')
     #return LSF object object's solve vector
-    bridge_poj_dyn.fourier_trans()
-    bridge_poj_dyn.lowpass_filter(1.5*bridge_poj_dyn.main_freq)
-    bridge_poj_dyn.compute_envelope()
+    bridge_poj_dyn.fourier_trans().lowpass_filter(1.5*bridge_poj_dyn.main_freq).compute_envelope(0.90)
     print(f'LSF objects solve vector: {bridge_poj_dyn.lsq_resutls().x}\n')
     # return Soft_L1 fit object
     #print(f'Soft_L1 fit object: {bridge_poj_dyn.softL1_results()}\n')

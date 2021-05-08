@@ -83,9 +83,9 @@ class Signal:
         return self
 
 
-    def compute_envelope(self):        
+    def compute_envelope(self, cut=0.98):        
         amplitude_envelope = np.abs(hilbert(self.Amplitude))
-        self.amplitude_envelope_cutted = amplitude_envelope[int(0.02 * len(amplitude_envelope)):int(0.98 * len(amplitude_envelope))] # docinka 
+        self.amplitude_envelope_cutted = amplitude_envelope[int(0.02 * len(amplitude_envelope)):int(cut * len(amplitude_envelope))] # docinka 
         return self
 
     def lsq_resutls(self):
